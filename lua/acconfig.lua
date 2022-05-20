@@ -1,4 +1,3 @@
-
 local lspkind = require('lspkind')
 local cmp = require("cmp")
 
@@ -13,36 +12,6 @@ end
 
 -- ...
 
-local cmp_kinds = {
-  Text = "",
-  Method = "",
-  Function = "",
-  Constructor = "",
-  Field = "ﰠ",
-  Variable = "",
-  Class = "ﴯ",
-  Interface = "",
-  Module = "",
-  Property = "ﰠ",
-  Unit = "塞",
-  Value = "",
-  Enum = "",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
-  EnumMember = "",
-  Constant = "",
-  Struct = "פּ",
-  Event = "",
-  Operator = "",
-  TypeParameter = "",
-}
-
--- ...
-
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -52,19 +21,18 @@ cmp.setup({
 	-- ...
 	formatting = {
 		format = lspkind.cmp_format({
+			mode = 'symbol', -- Show the only symbol annotations
+			maxwidth = 50, --prevent the popup from showing more than provided characters
 			with_text = true,
-			preset = 'codicons',
-			symbol_map = cmp_kinds, -- The glyph will be used `lspkind`
 			menu = ({
 				buffer = "[Buffer]",
 				nvim_lsp = "[LSP]",
 				luasnip = "[LuaSnip]",
 				nvim_lua = "[Lua]",
-				latex_symbols = "[Latext]",
-			}),
-		}),
+				latex_symbols = "[Latex]",
+			})
+		})
 	},
-	-- ...
 	-- ...
 	sources = {
 		{ name = 'nvim_lsp' },
@@ -89,23 +57,23 @@ cmp.setup({
 
 		-- Use Tab and Shift-Tab to browse through the suggestions.
 		["<Tab>"] = cmp.mapping(function(fallback)
-		if cmp.visible() then
-			cmp.select_next_item()
-		elseif vim.fn["vsnip#available"](1) == 1 then
-			feedkey("<Plug>(vsnip-expand-or-jump)", "")
-		elseif has_words_before() then
-			cmp.complete()
-		else
-			fallback()
-		end
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif vim.fn["vsnip#available"](1) == 1 then
+				feedkey("<Plug>(vsnip-expand-or-jump)", "")
+			elseif has_words_before() then
+				cmp.complete()
+			else
+				fallback()
+			end
 		end, { "i", "s" }),
 
 		["<S-Tab>"] = cmp.mapping(function()
-		if cmp.visible() then
-			cmp.select_prev_item()
-		elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-			feedkey("<Plug>(vsnip-jump-prev)", "")
-		end
+			if cmp.visible() then
+				cmp.select_prev_item()
+			elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+				feedkey("<Plug>(vsnip-jump-prev)", "")
+			end
 		end, { "i", "s" }),
 	},
 
@@ -115,16 +83,16 @@ cmp.setup({
 -- Use buffer source for `/`
 cmp.setup.cmdline('/', {
 	sources = {
-		{name = 'buffer'}
+		{ name = 'buffer' }
 	}
 })
 
 -- Use cmdline & path source for ':'
 cmp.setup.cmdline(':', {
 	sources = cmp.config.sources({
-		{name = 'path'}
-	},{
-		{name = 'cmdline'}
+		{ name = 'path' }
+	}, {
+		{ name = 'cmdline' }
 	})
 })
 
