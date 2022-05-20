@@ -12,7 +12,7 @@ require('onedark').load()
 
 -- ...
 
-require("nvim-lsp-installer").setup{
+require("nvim-lsp-installer").setup {
 	automatic_installation = true
 }
 local lspconfig = require("lspconfig")
@@ -31,18 +31,6 @@ local servers = {
 
 -- ...
 
-
--- Auto-install the required servers
---for _, name in pairs(servers) do
---	local server_is_found, server = lsp_installer.get_server(name)
---	if server_is_found and not server:is_installed() then
---		print("Installing " .. name)
---		server:install()
---	end
---end
-
--- ...
-
 -- Setting up keymaps
 
 local on_attach = function(_, bufnr)
@@ -51,6 +39,7 @@ local on_attach = function(_, bufnr)
 	local function buf_set_keymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
+
 	local function buf_set_option(...)
 		vim.api.nvim_buf_set_option(bufnr, ...)
 	end
@@ -58,7 +47,7 @@ local on_attach = function(_, bufnr)
 	-- Enable completion triggered by <c-x><c-o>
 	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-	local opts = {noremap=true, silent=true}
+	local opts = { noremap = true, silent = true }
 
 	-- ========== KEYMAPS ==========
 	-- Jump to definition
@@ -99,41 +88,43 @@ end
 
 -- ...
 
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
 
-lspconfig.sumneko_lua.setup{
-	on_attach = on_attach,
+require 'lspconfig'.sumneko_lua.setup {
 	settings = {
 		Lua = {
+			runtime = {
+				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+				version = 'LuaJIT',
+				-- Setup your lua path
+				path = runtime_path,
+			},
 			diagnostics = {
-				globals={"vim"}
-			}
-		}
-	}
+				-- Get the language server to recognize the `vim` global
+				globals = { 'vim' },
+			},
+			workspace = {
+				-- Make the server aware of Neovim runtime files
+				library = vim.api.nvim_get_runtime_file("", true),
+			},
+			-- Do not send telemetry data containing a randomized but unique identifier
+			telemetry = {
+				enable = false,
+			},
+		},
+	},
 }
 
-lspconfig.pyright.setup{}
+lspconfig.pyright.setup {}
+
+lspconfig.bashls.setup {}
 
 for _, name in pairs(servers) do
-	lspconfig[name].setup{on_attach = on_attach}
+	lspconfig[name].setup { on_attach = on_attach }
 end
 
---local server_specific_opts = {
---  sumneko_lua = function(opts)
---    opts.settings = {
---      Lua = {
---        -- NOTE: This is required for expansion of lua function signatures!
---        completion = {callSnippet = "Replace"},
---        diagnostics = {
---          globals = {'vim'},
---        },
---      },
---    }
---  end,
---
---  html = function(opts)
---    opts.filetypes = {"html", "htmldjango"}
---  end,
---}
 
 -- ...
 
@@ -142,24 +133,70 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
---lsp_installer.on_server_ready(function(server)
---  -- the keymaps, flags and capabilities that will be sent to the server as
---  -- options.
---  local opts = {
---    on_attach = on_attach,
---    flags = {debounce_text_changes = 150},
---    capabilities = capabilities,
---  }
---
---  -- If the current surver's name matches with the ones specified in the
---  -- `server_specific_opts`, set the options.
---  if server_specific_opts[server.name] then
---    server_specific_opts[server.name](opts)
---  end
---
---  -- And set up the server with our configuration!
---  server:setup(opts)
---end)
 
 -- ...
 
+-- Treesitter
+require('nvim-treesitter.configs').setup {
+	ensure_installed = { "python", "c", "cpp", "bash", "html", "lua" },
+	highlighgt = {
+		enable = true, -- false will disable the whole extension
+	},
+}
+
+-- ...
+
+require("lspsaga").init_lsp_saga({
+	finder_action_keys = {
+		open = '<CR>',
+		quit = { 'q', '<esc>' },
+	},
+	code_action_keys = {
+		quit = { 'q', '<esc>' }
+	},
+	rename_action_keys = {
+		quit = '<esc>',
+	},
+})
+
+-- ...
+
+-- Telescope
+
+vim.cmd [[
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+]]
+
+require('telescope').setup {
+	defaults = {
+		-- Default configuration for telescope goes here:
+		-- config_key = value,
+		mappings = {
+			i = {
+				-- map actions.which_key to <C-h> (default: <C-/>)
+				-- actions.which_key shows the mappings for your picker,
+				-- e.g. git_{create, delete, ...}_branch for the git_branches picker
+				["<C-h>"] = "which_key"
+			}
+		}
+	},
+	pickers = {
+		-- Default configuration for builtin pickers goes here:
+		-- picker_name = {
+		--   picker_config_key = value,
+		--   ...
+		-- }
+		-- Now the picker_config_key will be applied every time you call this
+		-- builtin picker
+	},
+	extensions = {
+		-- Your extension configuration goes here:
+		-- extension_name = {
+		--   extension_config_key = value,
+		-- }
+		-- please take a look at the readme of the extension you want to configure
+	}
+}
