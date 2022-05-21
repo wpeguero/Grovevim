@@ -34,6 +34,10 @@ require("packer").startup(function()
 			'hrsh7th/nvim-cmp',
 		}
 	}
+
+	Use {
+		'L3MON4D3/LuaSnip'
+	}
 	-- ...
 	-- bracket autocompletion
 	Use 'vim-scripts/auto-pairs-gentle'
