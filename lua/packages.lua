@@ -59,9 +59,9 @@ require("packer").startup(function()
 	Use "navarasu/onedark.nvim"
 
 	-- ...
-	
+
 	-- Telescope for Neovim
-	use {
+	Use {
 		'nvim-telescope/telescope.nvim',
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
