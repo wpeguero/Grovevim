@@ -82,7 +82,7 @@ local on_attach = function(_, bufnr)
 	-- NOTE: use `vim.cmd` since `buf_set_keymap` is not working with `tnoremap...`
 	vim.cmd [[
 	nnoremap <silent> <A-d> <cmd>lua require('lspsaga.floaterm').open_float_terminal()<CR>
-	nnoremap <silent> <A-d> <C-\><C-n>:lua require('lspsaga.floaterm').close_float_terminal()<CR>
+	tnoremap <silent> <A-d> <C-\><C-n>:lua require('lspsaga.floaterm').close_float_terminal()<CR>
 	]]
 end
 
