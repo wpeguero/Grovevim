@@ -45,13 +45,13 @@ augroup end
 
 -- Auto Bracket Pairing
 vim.g.AutoPairs = {
-	['(']=')',
-	['[']=']',
-	['{']='}',
-	["'"]="'",
-	['"']='"',
-	['`']='`',
-	['<']='>',
+	['('] = ')',
+	['['] = ']',
+	['{'] = '}',
+	["'"] = "'",
+	['"'] = '"',
+	['`'] = '`',
+	['<'] = '>',
 }
 
 -- ...
@@ -60,10 +60,8 @@ vim.g.AutoPairs = {
 require('lualine').setup({
 	sections = {
 		lualine_c = {
-			{'filename', path = 1},
+			{ 'filename', path = 1 },
 			'lsp_progress',
 		},
 	},
 })
-
--- ...
