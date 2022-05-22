@@ -139,7 +139,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 -- Treesitter
 require('nvim-treesitter.configs').setup {
 	ensure_installed = { "python", "c", "cpp", "bash", "html", "lua" },
-	highlighgt = {
+	highlight = {
 		enable = true, -- false will disable the whole extension
 	},
 }
