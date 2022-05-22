@@ -21,7 +21,7 @@ local lspconfig = require("lspconfig")
 -- The required servers
 local servers = {
 	"bashls",
-	"pyright",
+	"jedi_language_server",
 	"sumneko_lua",
 	"html",
 	"clangd",
@@ -117,7 +117,7 @@ require 'lspconfig'.sumneko_lua.setup {
 	},
 }
 
-lspconfig.pyright.setup {}
+lspconfig.jedi_language_server.setup {}
 
 lspconfig.bashls.setup {}
 
