@@ -6,7 +6,7 @@ require('packages')
 -- Colorscheme
 vim.opt.background = "dark"
 require("onedark").setup({
-	style = "deep",
+	style = "darker",
 	transparent = false,
 	term_colors = true,
 	ending_tildes = false,
