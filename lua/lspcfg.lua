@@ -1,3 +1,4 @@
+-- START
 require('essentials')
 require('packages')
 
@@ -66,6 +67,10 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
+-- ...
+-- Configuring Servers
+-- ...
+
 require 'lspconfig'.sumneko_lua.setup {
 	settings = {
 		Lua = {
@@ -91,14 +96,19 @@ require 'lspconfig'.sumneko_lua.setup {
 	},
 }
 
+-- ...
+
 lspconfig.jedi_language_server.setup {}
 
+-- ...
+
 lspconfig.bashls.setup {}
+
+-- ...
 
 for _, name in pairs(servers) do
 	lspconfig[name].setup { on_attach = on_attach }
 end
 
 
--- ...
-
+-- END

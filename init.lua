@@ -15,7 +15,11 @@ augroup Packer
 augroup end
 ]]
 
-require('packages')
+require('autocompletecfg')
+require('cschemecfg')
 require('essentials')
-require('plugconfig')
-require('acconfig')
+require('lspcfg')
+require('lspsagacfg')
+require('packages')
+require('telescopecfg.lua')
+require('treesittercfg')

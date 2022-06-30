@@ -1,3 +1,4 @@
+-- START
 Use = require("packer").use
 require("packer").startup(function()
 	-- Language Server installer
@@ -67,3 +68,4 @@ require("packer").startup(function()
 	}
 end)
 
+-- END
