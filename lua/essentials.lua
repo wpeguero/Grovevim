@@ -50,21 +50,8 @@ vim.g.netrw_liststyle = 3
 
 vim.g.netrw_banner = 0 --removes the banner from the directory explorer
 
--- Setting up the window size
-vim.g.netrw_browse_split = 4
 
-vim.g.netrw_altv = 1
 
-vim.g.netrw_winsize = 25
-
-vim.cmd [[
-augroup ProjectDrawer
-autocmd!
-autocmd VimEnter * :Vexplore
-augroup end
-]]
-
-vim.g.netrw_fastbrowse = 0
 
 -- ...
 
