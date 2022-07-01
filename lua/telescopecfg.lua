@@ -1,5 +1,5 @@
 -- START
-require("plugconfig")
+require('packages')
 
 -- ...
 -- Telescope
