@@ -10,6 +10,7 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <space>fb <cmd>Telescope file_browser<cr>
 ]]
 
 require('telescope').setup {
@@ -40,7 +41,20 @@ require('telescope').setup {
 		--   extension_config_key = value,
 		-- }
 		-- please take a look at the readme of the extension you want to configure
+		file_browser = {
+			hijack_netrw = true,
+			mappings = {
+				["i"] = {
+					--Custom insert mode mappings here
+				},
+				["n"] = {
+					--Custom normal mode mappings here
+				}
+			}
+		}
 	}
 }
+
+require("telescope").load_extension "file_browser"
 
 -- END
