@@ -66,6 +66,9 @@ require("packer").startup(function()
 		'nvim-telescope/telescope.nvim',
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
+
+	Use { "nvim-telescope/telescope-file-browser.nvim" }
+
 end)
 
 -- END
