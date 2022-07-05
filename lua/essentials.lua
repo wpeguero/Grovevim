@@ -2,6 +2,9 @@
 -- Do not show current vim mode since it is already shown by Lualine
 vim.o.showmode = false
 
+-- enable omnifunc
+vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
+
 -- enable autowriteall
 vim.o.autowriteall = true
 

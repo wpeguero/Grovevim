@@ -19,7 +19,7 @@ augroup end
 require('_theme')
 require('essentials')
 -- require('lspcfg')
--- require('lspsagacfg')
+require('_lspconfig')
 require('packages')
 require('_telescope')
 require('_treesitter')

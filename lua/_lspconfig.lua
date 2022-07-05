@@ -3,30 +3,34 @@
 -- ...
 -- Automate LSP Installation
 -- ...
-
 require("nvim-lsp-installer").setup({
 	ensure_installed = {
 		"sumneko_lua",
 		"jsonls",
 		"bashls",
-	}
-	automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
+	},
+	automatic_installation = true,
 	ui = {
 		icons = {
-		    server_installed = "✓",
-		    server_pending = "➜",
-		    server_uninstalled = "✗"
+			server_installed = "✓",
+			server_pending = "➜",
+			server_uninstalled = "✗",
 		}
-	    }
+	}
 })
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+-- You will likely want to reduce updatetime which affects CursorHold
+-- note: this setting is global and should be set only once
+vim.o.updatetime = 150
+vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -34,9 +38,25 @@ local on_attach = function(client, bufnr)
 	-- Enable completion triggered by <c-x><c-o>
 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+	-- Enable error diagnostic
+	vim.api.nvim_create_autocmd("CursorHold", {
+		buffer = bufnr,
+		callback = function()
+			local opts = {
+				focusable = false,
+				close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+				border = 'rounded',
+				source = 'always',
+				prefix = ' ',
+				scope = 'cursor',
+			}
+			vim.diagnostic.open_float(nil, opts)
+		end
+	})
+
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	local bufopts = { noremap=true, silent=true, buffer=bufnr }
+	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
 	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
 	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -48,20 +68,29 @@ local on_attach = function(client, bufnr)
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, bufopts)
 	vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-	vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+	vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 	vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
 
 local lsp_flags = {
--- This is the default in Nvim 0.7+
-debounce_text_changes = 150,
+	-- This is the default in Nvim 0.7+
+	debounce_text_changes = 150,
 }
 
 -- ...
 -- Setting the servers
 -- ...
+local lspconfig = require("lspconfig")
+
+lspconfig.util.default_config = vim.tbl_extend(
+	"force",
+	lspconfig.util.default_config,
+	{
+		on_attach = on_attach
+	}
+)
 
 local servers = {
 	"bashls",
@@ -81,9 +110,6 @@ table.insert(runtime_path, "lua/?/init.lua")
 -- Configuring Servers
 -- ...
 
-for _, name in pairs(servers) do
-	lspconfig[name].setup { on_attach = on_attach }
-end
 
 require 'lspconfig'.sumneko_lua.setup {
 	settings = {
@@ -110,5 +136,8 @@ require 'lspconfig'.sumneko_lua.setup {
 	},
 }
 
-require 'lspconfig'.pyright.setup{}
+require 'lspconfig'.pyright.setup {}
 
+for _, name in pairs(servers) do
+	lspconfig[name].setup { on_attach = on_attach }
+end
