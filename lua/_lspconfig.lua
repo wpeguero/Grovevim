@@ -99,7 +99,7 @@ lspconfig.util.default_config = vim.tbl_extend(
 
 local servers = {
 	"bashls",
-	"pyright",
+	"pylsp",
 	"sumneko_lua",
 	"html",
 	"clangd",
@@ -141,7 +141,7 @@ require 'lspconfig'.sumneko_lua.setup {
 	},
 }
 
-require 'lspconfig'.pyright.setup {}
+require 'lspconfig'.pylsp.setup {}
 
 for _, name in pairs(servers) do
 	lspconfig[name].setup { on_attach = on_attach }
