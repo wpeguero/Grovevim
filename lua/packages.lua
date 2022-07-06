@@ -10,9 +10,9 @@ require("packer").startup(function()
 	Use 'neovim/nvim-lspconfig'
 	-- BONUS: Customizations over LSP
 	-- Show VSCode-esque pictograms
-	Use 'onsails/lspkind-nvim'
+	-- Use 'onsails/lspkind-nvim'
 	-- show various elements of LSP as UI
-	Use {'tami5/lspsaga.nvim', requires = {'neovim/nvim-lspconfig'}}
+	-- Use {'tami5/lspsaga.nvim', requires = {'neovim/nvim-lspconfig'}}
 	-- ...
 	-- Autocompletion plugin
 	Use {
