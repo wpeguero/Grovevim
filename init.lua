@@ -15,10 +15,9 @@ augroup Packer
 augroup end
 ]]
 
--- require('autocompletecfg')
+require('autocomplete')
 require('_theme')
 require('essentials')
--- require('lspcfg')
 require('_lspconfig')
 require('packages')
 require('_telescope')
