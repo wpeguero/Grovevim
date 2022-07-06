@@ -3,6 +3,7 @@
 -- ...
 -- Automate LSP Installation
 -- ...
+
 require("nvim-lsp-installer").setup({
 	ensure_installed = {
 		"sumneko_lua",
@@ -19,8 +20,11 @@ require("nvim-lsp-installer").setup({
 	}
 })
 
+-- ...
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+-- ...
+
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
@@ -82,6 +86,7 @@ local lsp_flags = {
 -- ...
 -- Setting the servers
 -- ...
+
 local lspconfig = require("lspconfig")
 
 lspconfig.util.default_config = vim.tbl_extend(
@@ -141,3 +146,5 @@ require 'lspconfig'.pyright.setup {}
 for _, name in pairs(servers) do
 	lspconfig[name].setup { on_attach = on_attach }
 end
+
+-- END
