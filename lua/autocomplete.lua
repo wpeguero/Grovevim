@@ -13,7 +13,7 @@ local lspconfig = require('lspconfig')
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = {
 	"bashls",
-	"pyright",
+	"pylsp",
 	"sumneko_lua",
 	"html",
 	"clangd",
@@ -123,7 +123,7 @@ cmp.setup{
 		{ name = 'luasnip' },
 	},
 	view = {
-		entries = { name = 'wildmenu', separator = '|', selection_order = 'near_cursor' },
+		entries = { name = 'custom', selection_order = 'near_cursor' },
 	},
 }
 
