@@ -69,6 +69,8 @@ require("packer").startup(function()
 
 	Use { "nvim-telescope/telescope-file-browser.nvim" }
 
+	Use { "nvim-telescope/telescope-ui-select.nvim" }
+
 end)
 
 -- END
