@@ -45,29 +45,12 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 -- You will likely want to reduce updatetime which affects CursorHold
 -- note: this setting is global and should be set only once
 vim.o.updatetime = 150
-vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(_, bufnr)
 	-- Enable completion triggered by <c-x><c-o>
 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-	-- Enable error diagnostic
-	vim.api.nvim_create_autocmd("CursorHold", {
-		buffer = bufnr,
-		callback = function()
-			local opts = {
-				focusable = false,
-				close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-				border = 'rounded',
-				source = 'always',
-				prefix = ' ',
-				scope = 'cursor',
-			}
-			vim.diagnostic.open_float(nil, opts)
-		end
-	})
 
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
