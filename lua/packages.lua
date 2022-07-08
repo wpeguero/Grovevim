@@ -26,6 +26,11 @@ require("packer").startup(function()
 		}
 	}
 
+	-- ...
+	-- Code Action Lightbulb
+	Use { 'kosayoda/nvim-lightbulb' }
+
+	-- ...
 	-- snippets
 	Use {
 		'hrsh7th/cmp-vsnip',

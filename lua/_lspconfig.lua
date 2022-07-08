@@ -20,6 +20,17 @@ require("nvim-lsp-installer").setup({
 	}
 })
 
+
+-- ...
+-- Change Diagnostic Symbols
+-- ...
+
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
 -- ...
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -147,8 +158,5 @@ for _, name in pairs(servers) do
 	lspconfig[name].setup { on_attach = on_attach }
 end
 
-vim.cmd [[
-autocmd! CursorHold,CursorHoldI * lua require('code_action_utils').code_action_listener()
-]]
 
 -- END
