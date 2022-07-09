@@ -16,6 +16,7 @@ augroup end
 ]]
 
 require('autocomplete')
+require('_blankline')
 require('_theme')
 require('essentials')
 require('_lspconfig')

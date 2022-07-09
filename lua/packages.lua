@@ -44,9 +44,11 @@ require("packer").startup(function()
 	Use {
 		'L3MON4D3/LuaSnip'
 	}
+
 	-- ...
 	-- bracket autocompletion
 	Use 'vim-scripts/auto-pairs-gentle'
+
 	-- ...
 	-- Fancier statusline
 	Use {
@@ -65,7 +67,6 @@ require("packer").startup(function()
 	Use "navarasu/onedark.nvim"
 
 	-- ...
-
 	-- Telescope for Neovim
 	Use {
 		'nvim-telescope/telescope.nvim',
@@ -76,6 +77,9 @@ require("packer").startup(function()
 
 	Use { "nvim-telescope/telescope-ui-select.nvim" }
 
+	-- ...
+	-- Indent lines
+	Use {"lukas-reineke/indent-blankline.nvim"}
 end)
 
 -- END
