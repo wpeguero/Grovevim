@@ -12,7 +12,9 @@ require('nvim-treesitter.configs').setup {
 		"cpp",
 		"bash",
 		"html",
-		"lua"
+		"lua",
+		"markdown",
+		"c_sharp",
 	},
 	highlight = {
 		enable = true,
