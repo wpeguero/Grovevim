@@ -142,6 +142,18 @@ require 'lspconfig'.sumneko_lua.setup {
 
 require 'lspconfig'.pylsp.setup {
 	on_attach = on_attach,
+	settings = {
+		pylsp = {
+			plugins = {
+				pycodestyle = {
+					enabled = true,
+					maxLineLength = 90,
+					ignore = "E501"
+				},
+
+			}
+		}
+	}
 }
 
 
