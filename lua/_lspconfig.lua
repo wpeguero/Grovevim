@@ -99,6 +99,7 @@ local servers = {
 	"clangd",
 	"vimls",
 	"emmet_ls",
+	"julials",
 }
 
 local runtime_path = vim.split(package.path, ';')
@@ -109,6 +110,9 @@ table.insert(runtime_path, "lua/?/init.lua")
 -- Configuring Servers
 -- ...
 
+for _, name in pairs(servers) do
+	lspconfig[name].setup { on_attach = on_attach }
+end
 
 require 'lspconfig'.sumneko_lua.setup {
 	settings = {
@@ -133,13 +137,13 @@ require 'lspconfig'.sumneko_lua.setup {
 			},
 		},
 	},
+	on_attach = on_attach
 }
 
-require 'lspconfig'.pylsp.setup {}
+require 'lspconfig'.pylsp.setup {
+	on_attach = on_attach,
+}
 
-for _, name in pairs(servers) do
-	lspconfig[name].setup { on_attach = on_attach }
-end
 
 
 -- END
