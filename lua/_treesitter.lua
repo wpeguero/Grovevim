@@ -14,7 +14,9 @@ require('nvim-treesitter.configs').setup {
 		"html",
 		"lua",
 		"markdown",
+		"markdown_inline",
 		"c_sharp",
+		"julia",
 	},
 	highlight = {
 		enable = true,
