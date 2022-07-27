@@ -3,22 +3,29 @@
 -- ...
 -- Automate LSP Installation
 -- ...
-
-require("nvim-lsp-installer").setup({
-	ensure_installed = {
-		"sumneko_lua",
-		"jsonls",
-		"bashls",
-	},
-	automatic_installation = true,
+require("mason").setup({
 	ui = {
 		icons = {
-			server_installed = "✓",
-			server_pending = "➜",
-			server_uninstalled = "✗",
+			package_installed = "✓",
+			package_pending = "➜",
+			package_uninstalled = "✗"
 		}
 	}
 })
+
+require("mason-lspconfig").setup {
+	ensure_installed = {
+		"bashls",
+		"pylsp",
+		"sumneko_lua",
+		"html",
+		"clangd",
+		"vimls",
+		"emmet_ls",
+		"julials",
+		"marksman"
+	}
+}
 
 
 -- ...
