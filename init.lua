@@ -15,12 +15,12 @@ augroup Packer
 augroup end
 ]]
 
+require('packages')
+require('essentials')
 require('autocomplete')
 require('_blankline')
 require('_theme')
-require('essentials')
 require('_lspconfig')
 require('_lspcalightbulb')
-require('packages')
 require('_telescope')
 require('_treesitter')
