@@ -3,7 +3,8 @@ Use = require("packer").use
 require("packer").startup(function()
 	-- Language Server installer
 	Use {
-	'williamboman/nvim-lsp-installer',
+		'williamboman/mason.nvim',
+		'williamboman/mason-lspconfig.nvim'
 	}
 	-- ...
 	-- LSP Client
@@ -29,6 +30,10 @@ require("packer").startup(function()
 	-- ...
 	-- Code Action Lightbulb
 	Use { 'kosayoda/nvim-lightbulb' }
+
+	-- ...
+	-- Unicode Characters
+	Use {'chrisbra/unicode.vim'}
 
 	-- ...
 	-- snippets
