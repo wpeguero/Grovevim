@@ -109,6 +109,11 @@ _G.packer_plugins = {
     path = "/home/wilsonpr/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/home/wilsonpr/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
   ["lualine-lsp-progress"] = {
     loaded = true,
     path = "/home/wilsonpr/.local/share/nvim/site/pack/packer/start/lualine-lsp-progress",
@@ -119,6 +124,16 @@ _G.packer_plugins = {
     path = "/home/wilsonpr/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["mason-lspconfig.nvim"] = {
+    loaded = true,
+    path = "/home/wilsonpr/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+  },
+  ["mason.nvim"] = {
+    loaded = true,
+    path = "/home/wilsonpr/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/wilsonpr/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -128,11 +143,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/wilsonpr/.local/share/nvim/site/pack/packer/start/nvim-lightbulb",
     url = "https://github.com/kosayoda/nvim-lightbulb"
-  },
-  ["nvim-lsp-installer"] = {
-    loaded = true,
-    path = "/home/wilsonpr/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
-    url = "https://github.com/williamboman/nvim-lsp-installer"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -173,6 +183,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/wilsonpr/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["unicode.vim"] = {
+    loaded = true,
+    path = "/home/wilsonpr/.local/share/nvim/site/pack/packer/start/unicode.vim",
+    url = "https://github.com/chrisbra/unicode.vim"
   },
   ["vim-vsnip"] = {
     loaded = true,
