@@ -42,12 +42,11 @@ end
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 -- ...
-
-local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+local opts = { noremap = true, silent = true, callback = vim.lsp.buf.references}
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, { unpack(opts), desc = "Open window containing the error or diagnosis." })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { unpack(opts), desc = "Go to the previous error." })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { unpack(opts), desc = "Go to the next error." })
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, { unpack(opts), desc = "Open a list of diagnoses in new buffer." })
 
 -- You will likely want to reduce updatetime which affects CursorHold
 -- note: this setting is global and should be set only once
@@ -61,22 +60,22 @@ local on_attach = function(_, bufnr)
 
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-	vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-	vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+	local bufopts = { noremap = true, silent = true, buffer = bufnr, callback = vim.lsp.buf.references }
+	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { unpack(bufopts), desc = "Go to declaration." })
+	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { unpack(bufopts), desc = "Go to definition." })
+	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { unpack(bufopts), desc = "Get definition." })
+	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { unpack(bufopts), desc = "Implementation" })
+	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { unpack(bufopts), desc = "Signature help." })
+	vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, { unpack(bufopts), desc = "Add workspace folder." })
+	vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, { unpack(bufopts), desc = "Remove workspace folder." })
 	vim.keymap.set('n', '<space>wl', function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, bufopts)
-	vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-	vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-	vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+	end, { unpack(bufopts), desc = "List workspace folders." })
+	vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, { unpack(bufopts), desc = "Type definition." })
+	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { unpack(bufopts), desc = "Renamee everywhere." })
+	vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { unpack(bufopts), desc = "Use code action." })
+	vim.keymap.set('n', 'gr', vim.lsp.buf.references, { unpack(bufopts), desc = "Obtain references" })
+	vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, { unpack(bufopts), desc = "Format the entire document" })
 end
 
 local lsp_flags = {
