@@ -1,6 +1,8 @@
 -- START
 Use = require("packer").use
 require("packer").startup(function()
+	-- Package Manager
+	Use 'wbthomason/packer.nvim'
 	-- Language Server installer
 	Use {
 		'williamboman/mason.nvim',
