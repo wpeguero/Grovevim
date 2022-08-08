@@ -17,6 +17,7 @@ augroup end
 
 require('packages')
 require('essentials')
+require('_lualine')
 require('autocomplete')
 require('_blankline')
 require('_theme')
@@ -24,3 +25,4 @@ require('_lspconfig')
 require('_lspcalightbulb')
 require('_telescope')
 require('_treesitter')
+
