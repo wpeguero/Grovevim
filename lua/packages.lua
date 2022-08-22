@@ -3,11 +3,6 @@ Use = require("packer").use
 require("packer").startup(function()
 	-- Package Manager
 	Use 'wbthomason/packer.nvim'
-	-- Language Server installer
-	Use {
-		'williamboman/mason.nvim',
-		'williamboman/mason-lspconfig.nvim'
-	}
 	-- ...
 	-- LSP Client
 	Use 'neovim/nvim-lspconfig'
