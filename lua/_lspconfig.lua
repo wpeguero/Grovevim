@@ -124,7 +124,12 @@ require 'lspconfig'.pylsp.setup {
 					maxLineLength = 90,
 					ignore = "E501"
 				},
-
+				pydocstyle = {
+					enabled = true,
+				},
+				autopep8 = {
+					enabled = true,
+				},
 			}
 		}
 	}
