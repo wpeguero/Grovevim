@@ -74,7 +74,8 @@ local servers = {
 	"emmet_ls",
 	"julials",
 	"marksman",
-	"sqlls"
+	"sqlls",
+	"csharp_ls"
 }
 
 local runtime_path = vim.split(package.path, ';')
