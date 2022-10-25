@@ -1,34 +1,6 @@
 -- START
 
 -- ...
--- Automate LSP Installation
--- ...
-require("mason").setup({
-	ui = {
-		icons = {
-			package_installed = "✓",
-			package_pending = "➜",
-			package_uninstalled = "✗"
-		}
-	}
-})
-
-require("mason-lspconfig").setup {
-	ensure_installed = {
-		"bashls",
-		"pylsp",
-		"sumneko_lua",
-		"html",
-		"clangd",
-		"vimls",
-		"emmet_ls",
-		"julials",
-		"marksman"
-	}
-}
-
-
--- ...
 -- Change Diagnostic Symbols
 -- ...
 
@@ -78,11 +50,6 @@ local on_attach = function(_, bufnr)
 	vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, { unpack(bufopts), desc = "Format the entire document" })
 end
 
-local lsp_flags = {
-	-- This is the default in Nvim 0.7+
-	debounce_text_changes = 150,
-}
-
 -- ...
 -- Setting the servers
 -- ...
@@ -106,7 +73,9 @@ local servers = {
 	"vimls",
 	"emmet_ls",
 	"julials",
-	"marksman"
+	"marksman",
+	"sqlls",
+	"csharp_ls"
 }
 
 local runtime_path = vim.split(package.path, ';')
@@ -157,7 +126,12 @@ require 'lspconfig'.pylsp.setup {
 					maxLineLength = 90,
 					ignore = "E501"
 				},
-
+				pydocstyle = {
+					enabled = true,
+				},
+				autopep8 = {
+					enabled = true,
+				},
 			}
 		}
 	}
