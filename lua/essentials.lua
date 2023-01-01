@@ -2,6 +2,9 @@
 -- Do not show current vim mode since it is already shown by Lualine
 vim.o.showmode = false
 
+-- Remove the use of mouse
+vim.opt.mouse = ""
+
 -- enable omnifunc
 vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
