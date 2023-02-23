@@ -67,7 +67,7 @@ lspconfig.util.default_config = vim.tbl_extend(
 local servers = {
 	"bashls",
 	"pylsp",
-	"sumneko_lua",
+	"lua_ls",
 	"html",
 	"clangd",
 	"vimls",
@@ -90,7 +90,7 @@ for _, name in pairs(servers) do
 	lspconfig[name].setup { on_attach = on_attach }
 end
 
-require 'lspconfig'.sumneko_lua.setup {
+require 'lspconfig'.lua_ls.setup {
 	settings = {
 		Lua = {
 			runtime = {

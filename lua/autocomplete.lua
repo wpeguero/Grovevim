@@ -14,7 +14,7 @@ local lspconfig = require('lspconfig')
 local servers = {
 	"bashls",
 	"pylsp",
-	"sumneko_lua",
+	"lua_ls",
 	"html",
 	"clangd",
 	"vimls",
