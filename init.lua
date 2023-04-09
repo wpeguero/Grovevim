@@ -1,5 +1,6 @@
 -- Setting up the lazy loader
-require('packages')
+--require('packages')
+require('lpackages')
 require('essentials')
 require('_lualine')
 require('autocomplete')

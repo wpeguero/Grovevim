@@ -1,5 +1,5 @@
 -- START
-require('packages')
+require('lpackages')
 
 -- Colorscheme
 vim.opt.background = "dark"
