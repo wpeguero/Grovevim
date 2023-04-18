@@ -13,9 +13,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	-- Toggle Terminal
-	{ 'akinsho/toggleterm.nvim', version="*", config = true },
-
 	-- LSP Client
 	'neovim/nvim-lspconfig',
 	-- BONUS: Customizations over LSP
@@ -61,8 +58,9 @@ require("lazy").setup({
 	'nvim-treesitter/nvim-treesitter',
 	-- ...
 	-- Beautiful colorscheme
-	"navarasu/onedark.nvim",
-
+	-- "navarasu/onedark.nvim",
+	-- {"rose-pine/nvim", name = 'rose-pine'},
+	{"folke/tokyonight.nvim", name = "Night"},
 	-- ...
 	-- Telescope for Neovim
 	'nvim-telescope/telescope.nvim',
@@ -74,6 +72,12 @@ require("lazy").setup({
 
 	-- ...
 	-- Indent lines
-	{"lukas-reineke/indent-blankline.nvim"}
+	{"lukas-reineke/indent-blankline.nvim"},
+
+	{
+		"akinsho/toggleterm.nvim",
+		version = '*',
+		opts = {direction='float'}
+	},
 
 })

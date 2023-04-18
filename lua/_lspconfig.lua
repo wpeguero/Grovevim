@@ -44,7 +44,7 @@ local on_attach = function(_, bufnr)
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, { unpack(bufopts), desc = "List workspace folders." })
 	vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, { unpack(bufopts), desc = "Type definition." })
-	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { unpack(bufopts), desc = "Renamee everywhere." })
+	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { unpack(bufopts), desc = "Rename everywhere." })
 	vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { unpack(bufopts), desc = "Use code action." })
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, { unpack(bufopts), desc = "Obtain references" })
 	vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, { unpack(bufopts), desc = "Format the entire document" })
@@ -95,7 +95,7 @@ require 'lspconfig'.lua_ls.setup {
 		Lua = {
 			runtime = {
 				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-				version = 'LuaJIT 2.1',
+				version = 'LuaJIT',
 				-- Setup your lua path
 				path = runtime_path,
 			},

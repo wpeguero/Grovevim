@@ -57,10 +57,8 @@ vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0 --removes the banner from the directory explorer
 
 
-
-
+vim.keymap.set('n', '<C-t>', ':ToggleTerm<CR>', {desc="Open Floating Terminal."})
 -- ...
-
 -- Auto Bracket Pairing
 vim.g.AutoPairs = {
 	['('] = ')',
