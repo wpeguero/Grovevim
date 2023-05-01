@@ -137,6 +137,6 @@ require 'lspconfig'.pylsp.setup {
 	}
 }
 
-
+require("mason").setup()
 
 -- END

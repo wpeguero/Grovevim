@@ -57,6 +57,10 @@ require("lazy").setup({
 	-- Fast incremental parsing library
 	'nvim-treesitter/nvim-treesitter',
 	-- ...
+	-- Portable package manager for LSP servers, DAP servers, linters, and formatters
+	-- Mason.nvim
+	{'williamboman/mason.nvim', build = ":MasonUpdate"},
+	-- ...
 	-- Beautiful colorscheme
 	-- "navarasu/onedark.nvim",
 	-- {"rose-pine/nvim", name = 'rose-pine'},
