@@ -59,7 +59,7 @@ require("lazy").setup({
 	-- ...
 	-- Portable package manager for LSP servers, DAP servers, linters, and formatters
 	-- Mason.nvim
-	{'williamboman/mason.nvim', build = ":MasonUpdate"},
+	-- {'williamboman/mason.nvim', build = ":MasonUpdate"},
 	-- ...
 	-- Beautiful colorscheme
 	-- "navarasu/onedark.nvim",
