@@ -62,9 +62,12 @@ require("lazy").setup({
 	-- {'williamboman/mason.nvim', build = ":MasonUpdate"},
 	-- ...
 	-- Beautiful colorscheme
-	-- "navarasu/onedark.nvim",
-	-- {"rose-pine/nvim", name = 'rose-pine'},
+	"navarasu/onedark.nvim",
+	{"catppuccin/nvim", name = "catppuccin", priority = 1000},
+	"rebelot/kanagawa.nvim",
 	{"folke/tokyonight.nvim", name = "Night"},
+	"LunarVim/onedarker.nvim",
+
 	-- ...
 	-- Telescope for Neovim
 	'nvim-telescope/telescope.nvim',
