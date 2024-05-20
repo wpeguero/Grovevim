@@ -11,6 +11,16 @@ for type, icon in pairs(signs) do
 end
 
 -- ...
+-- Set Window Width
+-- ...
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or 'single'
+  opts.max_width= opts.max_width or 80
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+-- ...
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 -- ...
@@ -47,7 +57,7 @@ local on_attach = function(_, bufnr)
 	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { unpack(bufopts), desc = "Rename everywhere." })
 	vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { unpack(bufopts), desc = "Use code action." })
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, { unpack(bufopts), desc = "Obtain references" })
-	vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, { unpack(bufopts), desc = "Format the entire document" })
+	vim.keymap.set('n', '<space>f', vim.lsp.buf.format, { unpack(bufopts), desc = "Format the entire document" })
 end
 
 -- ...

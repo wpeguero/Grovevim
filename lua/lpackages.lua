@@ -43,6 +43,7 @@ require("lazy").setup({
 	'rafamadriz/friendly-snippets',
 	'hrsh7th/nvim-cmp',
 	'L3MON4D3/LuaSnip',
+	'rafamadriz/friendly-snippets',
 
 	-- ...
 	-- bracket autocompletion
@@ -51,7 +52,7 @@ require("lazy").setup({
 	-- ...
 	-- Fancier statusline
 	'nvim-lualine/lualine.nvim',
-	'kyazdani42/nvim-web-devicons',
+	'nvim-tree/nvim-web-devicons',
 	'arkav/lualine-lsp-progress',
 	-- ...
 	-- Fast incremental parsing library
