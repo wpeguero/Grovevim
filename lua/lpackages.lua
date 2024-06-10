@@ -29,6 +29,17 @@ require("lazy").setup({
 	'hrsh7th/cmp-cmdline',
 	'hrsh7th/nvim-cmp',
 	-- ...
+	-- VimTex
+	{
+		  "lervag/vimtex",
+		  lazy = false,     -- we don't want to lazy load VimTeX
+		  -- tag = "v2.15", -- uncomment to pin to a specific release
+		  init = function()
+			    -- VimTeX configuration goes here, e.g.
+			    vim.g.vimtex_view_method = "zathura"
+		  end
+	},
+	-- ...
 	-- Code Action Lightbulb
 	{ 'kosayoda/nvim-lightbulb' },
 
@@ -41,7 +52,6 @@ require("lazy").setup({
 	'hrsh7th/cmp-vsnip',
 	'hrsh7th/vim-vsnip',
 	'rafamadriz/friendly-snippets',
-	'hrsh7th/nvim-cmp',
 	'L3MON4D3/LuaSnip',
 	'rafamadriz/friendly-snippets',
 
@@ -92,7 +102,41 @@ require("lazy").setup({
 	{"lewis6991/gitsigns.nvim"},
 
 	{
-		 "folke/trouble.nvim",
-		 dependencies = { "nvim-tree/nvim-web-devicons" },
+		"folke/trouble.nvim",
+		opts = {},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		cmd = "Trouble",
+		keys = {
+			{
+				"<leader>xx",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+			{
+				"<leader>xX",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
+			},
+			{
+				"<leader>cs",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "Symbols (Trouble)",
+			},
+			{
+				"<leader>cl",
+				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+				desc = "LSP Definitions / references / ... (Trouble)",
+			},
+			{
+				"<leader>xL",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "Location List (Trouble)",
+			},
+			{
+				"<leader>xQ",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "Quickfix List (Trouble)",
+			},
+		},
 	}
 })
