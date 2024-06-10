@@ -39,7 +39,6 @@ local config = {
 		-- Disable sections and component separators
 		component_separators = '',
 		section_separators = '',
-		--theme = "catppuccin",
 		theme = {
 			-- We are going to use lualine_c an lualine_x as left and
 			-- right section. Both are highlighted by c theme .  So we
@@ -74,7 +73,7 @@ local function ins_left(component)
 	table.insert(config.sections.lualine_c, component)
 end
 
--- Inserts a component in lualine_x ot right section
+-- Inserts a component in lualine_x at right section
 local function ins_right(component)
 	table.insert(config.sections.lualine_x, component)
 end
@@ -98,13 +97,13 @@ ins_left {
 			n = colors.red,
 			i = colors.green,
 			v = colors.blue,
-			[''] = colors.blue,
+			['␖'] = colors.blue,
 			V = colors.blue,
 			c = colors.magenta,
 			no = colors.red,
 			s = colors.orange,
 			S = colors.orange,
-			[''] = colors.orange,
+			['␓'] = colors.orange,
 			ic = colors.yellow,
 			R = colors.violet,
 			Rv = colors.violet,
@@ -160,7 +159,7 @@ ins_left {
 	-- Lsp server name .
 	function()
 		local msg = 'No Active Lsp'
-		local buf_ft = vim.api.nvim_buf_get_option_value(0, 'filetype')
+		local buf_ft = vim.api.nvim_get_option_value('filetype', {buf=0})
 		local clients = vim.lsp.get_clients()
 		if next(clients) == nil then
 			return msg
@@ -201,7 +200,7 @@ ins_right {
 ins_right {
 	'diff',
 	-- Is it me or the symbol for modified us really weird
-	symbols = { added = ' ', modified = '~  ', removed = ' ' },
+	symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
 	diff_color = {
 		added = { fg = colors.green },
 		modified = { fg = colors.orange },
