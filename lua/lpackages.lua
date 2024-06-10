@@ -14,7 +14,9 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	-- LSP Client
-	'neovim/nvim-lspconfig',
+	{
+		'neovim/nvim-lspconfig',
+	},
 	-- BONUS: Customizations over LSP
 	-- Show VSCode-esque pictograms
 	-- Use 'onsails/lspkind-nvim'
