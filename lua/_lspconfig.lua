@@ -1,4 +1,33 @@
 -- START
+
+-- ...
+-- Extend Neovim LSP
+-- ...
+
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+local lspconfig = require('lspconfig')
+
+-- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+local servers = {
+	"bashls",
+	"ruff",
+	"pylsp",
+	"lua_ls",
+	"html",
+	"clangd",
+	"vimls",
+	"emmet_ls",
+	"julials",
+	"marksman",
+	"sqlls",
+	"texlab",
+	"csharp_ls",
+	"rust_analyzer",
+}
+
+
 -- ...
 -- Custom Key Maps for LSP Capabilities
 --
@@ -36,6 +65,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 		if client.supports_method("textDocument/signatureHelp") then
 			vim.keymap.set('n', '<leader>sh', vim.lsp.buf.signature_help, {unpack(args), desc = "Get signature help."})
+			require("lsp_signature").on_attach({hint_prefix = "π "}, bufnr)
 		end
 		if client.supports_method("textDocument/references") then
 			vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, {unpack(args), desc = "Get references."})
@@ -71,22 +101,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 vim.o.updatetime = 150
 
-local lspconfig = require("lspconfig")
 
-local servers = {
-	"bashls",
-	"pylsp",
-	"lua_ls",
-	"html",
-	"clangd",
-	"vimls",
-	"emmet_ls",
-	"julials",
-	"marksman",
-	"sqlls",
-	"texlab",
-	"csharp_ls"
-}
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
@@ -96,11 +111,13 @@ table.insert(runtime_path, "lua/?/init.lua")
 -- Configuring Servers
 -- ...
 
-for _, name in pairs(servers) do
-	lspconfig[name].setup {}
+for _, lsp in ipairs(servers) do
+	lspconfig[lsp].setup {
+		capabilities = capabilities,
+	}
 end
 
-require 'lspconfig'.lua_ls.setup {
+lspconfig.lua_ls.setup {
 	settings = {
 		Lua = {
 			runtime = {
@@ -130,22 +147,39 @@ require 'lspconfig'.pylsp.setup {
 	settings = {
 		pylsp = {
 			plugins = {
-			--	pycodestyle = {
-			--		enabled = true,
-			--		maxLineLength = 90,
-			--		ignore = "E501"
-			--	},
-			--	autopep8 = {
-			--		enabled = true,
-			--	},
 				ruff = {
-					enabled = true,
+					enabled = false,
 					formatEnabled = true,
-					lineLength = 90,
-				}
+					lineLength = 120,
+				},
+				pycodestyle = {
+					enabled = false,
+					maxLineLength = 120,
+					--ignore = "E501"
+				},
+				pydocstyle = {
+					enabled = true,
+				},
+				pylsp_mypy = {
+					enabled = true,
+				},
+				mypy = {
+					enabled = true,
+				},
+				autopep8 = {
+					enabled = false,
+				},
+				pyflakes = {
+					enabled = false
+				},
+				mccabe = {
+					enabled = true
+				},
 			}
 		}
 	}
 }
+
+lspconfig.ruff.setup{}
 
 -- END

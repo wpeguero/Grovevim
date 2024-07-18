@@ -2,6 +2,9 @@
 -- Do not show current vim mode since it is already shown by Lualine
 vim.o.showmode = false
 
+-- Copy to clipboard
+vim.opt.clipboard = 'unnamedplus'
+
 -- Remove the use of mouse
 vim.opt.mouse = ""
 

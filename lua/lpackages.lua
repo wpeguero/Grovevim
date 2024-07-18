@@ -17,6 +17,12 @@ require("lazy").setup({
 	{
 		'neovim/nvim-lspconfig',
 	},
+	{
+		'ray-x/lsp_signature.nvim',
+		even = "VeryLazy",
+		opts = {},
+		config = function(_, opts) require'lsp_signature'.setup(opts) end
+	},
 	-- BONUS: Customizations over LSP
 	-- Show VSCode-esque pictograms
 	-- Use 'onsails/lspkind-nvim'

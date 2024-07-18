@@ -18,6 +18,7 @@ require('nvim-treesitter.configs').setup {
 		"c_sharp",
 		"julia",
 		"sql",
+		"rust",
 		--"latex",
 	},
 	highlight = {
