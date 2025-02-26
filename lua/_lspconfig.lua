@@ -149,13 +149,14 @@ require 'lspconfig'.pylsp.setup {
 			plugins = {
 				ruff = {
 					enabled = false,
-					formatEnabled = true,
+					formatEnabled = false,
 					lineLength = 120,
 				},
 				pycodestyle = {
-					enabled = false,
+					enabled = true,
 					maxLineLength = 120,
-					--ignore = "E501"
+					ignore = "E501",
+					convention = 'pep257',
 				},
 				pydocstyle = {
 					enabled = true,
@@ -167,7 +168,7 @@ require 'lspconfig'.pylsp.setup {
 					enabled = true,
 				},
 				autopep8 = {
-					enabled = false,
+					enabled = true,
 				},
 				pyflakes = {
 					enabled = false
