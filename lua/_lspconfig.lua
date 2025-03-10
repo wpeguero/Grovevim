@@ -13,7 +13,8 @@ local lspconfig = require('lspconfig')
 local servers = {
 	"bashls",
 	"ruff",
-	"pylsp",
+	"pyright",
+	--"pylsp",
 	"lua_ls",
 	"html",
 	"clangd",
@@ -58,6 +59,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.keymap.set('n', '<leader>td', vim.lsp.buf.definition, {unpack(args), desc = "Get type definition"})
 		end
 		if client.supports_method("textDocument/hover") then
+			if client.name == 'ruff' then
+				client.server_capabilities.hoverProvider = false
+			end
 			vim.keymap.set('n', 'K', vim.lsp.buf.hover, {unpack(args), desc = "Get definition."})
 		end
 		if client.supports_method("textDocument/rename") then
@@ -143,41 +147,46 @@ lspconfig.lua_ls.setup {
 	},
 }
 
-require 'lspconfig'.pylsp.setup {
+--require 'lspconfig'.pylsp.setup {
+--	settings = {
+--		pylsp = {
+--			plugins = {
+--				ruff = {
+--					enabled = true,
+--					formatEnabled = true,
+--					lineLength = 120,
+--				},
+--				pydocstyle = {
+--					enabled = true,
+--					convention = 'pep257',
+--				},
+--				autopep8 = {
+--					enabled = true,
+--				},
+--				pyflakes = {
+--					enabled = false
+--				},
+--				mccabe = {
+--					enabled = true
+--				},
+--			}
+--		}
+--	}
+--}
+
+lspconfig.pyright.setup {
 	settings = {
-		pylsp = {
-			plugins = {
-				ruff = {
-					enabled = false,
-					formatEnabled = true,
-					lineLength = 120,
-				},
-				pycodestyle = {
-					enabled = false,
-					maxLineLength = 120,
-					--ignore = "E501"
-				},
-				pydocstyle = {
-					enabled = true,
-				},
-				pylsp_mypy = {
-					enabled = true,
-				},
-				mypy = {
-					enabled = true,
-				},
-				autopep8 = {
-					enabled = false,
-				},
-				pyflakes = {
-					enabled = false
-				},
-				mccabe = {
-					enabled = true
-				},
-			}
-		}
-	}
+		pyright = {
+			-- Using Ruff's import organizer.
+			disableOrganizeImports = true,
+		},
+		python = {
+			analysis = {
+				-- Ignore all files for analysis to exclusively use Ruff for linting.
+				ignore = { '*' },
+			},
+		},
+	},
 }
 
 lspconfig.ruff.setup{}
